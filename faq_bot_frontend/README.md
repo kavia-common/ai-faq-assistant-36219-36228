@@ -1,82 +1,59 @@
-# Lightweight React Template for KAVIA
+# FAQ Bot Frontend (React)
 
-This project provides a minimal React template with a clean, modern UI and minimal dependencies.
+A clean and modern interface for interacting with the AI-powered FAQ Bot (RAG + MCP).
+Implements the Ocean Professional theme with blue primary and amber accents.
 
 ## Features
-
-- **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
-- **Fast**: Minimal dependencies for quick loading times
-- **Simple**: Easy to understand and modify
+- Ocean Professional theme (modern, minimalist, subtle gradients, smooth transitions)
+- Central question input with primary action
+- Answer panel with loading and error states
+- Recent questions sidebar with quick select and clear
+- REST API integration via environment-configurable base URL
 
 ## Getting Started
 
-In the project directory, you can run:
+Install dependencies:
+- npm install
 
-### `npm start`
+Run the app in development mode:
+- npm start
+Open http://localhost:3000 in your browser.
 
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Build for production:
+- npm run build
 
-### `npm test`
+## Backend API
 
-Launches the test runner in interactive watch mode.
+By default, the frontend will POST to the relative route:
+- POST /api/ask
+Body:
+- { "question": "your question" }
 
-### `npm run build`
+If your backend runs on a different host/port, set an environment variable:
+- Create a .env file in the project root, using .env.example as a reference
+- REACT_APP_API_BASE_URL=http://localhost:8000
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The final endpoint becomes {REACT_APP_API_BASE_URL}/api/ask
 
-## Customization
+## Theme
 
-### Colors
+Key theme variables are defined in src/App.css:
+- --primary: #2563EB
+- --secondary: #F59E0B
+- --bg, --surface, --text, etc.
 
-The main brand colors are defined as CSS variables in `src/App.css`:
+Theme toggle (light/dark) is supported and applied at document root (data-theme attribute).
 
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
-```
+## Project Structure
 
-### Components
+- src/App.js: Main layout tying together header, input, answer, recent
+- src/components/Header.jsx: Top bar with brand and theme toggle
+- src/components/QuestionInput.jsx: Central input + Ask button
+- src/components/AnswerPanel.jsx: Displays AI answer
+- src/components/RecentQuestions.jsx: Sidebar list of previous questions
+- src/services/api.js: REST API calls and environment config
 
-This template uses pure HTML/CSS components instead of a UI framework. You can find component styles in `src/App.css`. 
+## Notes
 
-Common components include:
-- Buttons (`.btn`, `.btn-large`)
-- Container (`.container`)
-- Navigation (`.navbar`)
-- Typography (`.title`, `.subtitle`, `.description`)
-
-## Learn More
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- No heavy UI frameworks are used; styles are handcrafted for performance and clarity.
+- Keep the backend URL in environment variables; do not hardcode secrets or addresses.
